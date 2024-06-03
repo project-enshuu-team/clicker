@@ -31,7 +31,11 @@
             <h4 id="godcost">🍤 999999</h4>
         </a>
     </div>
-
-    <script src="script.js"></script>
+    <script type="module" defer>
+        import {save,load} from "./firebase.js"
+        window.save = save;
+        window.load = load;
+    </script>
+    <script src="script.js" defer></script>
 </body>   
 </html>

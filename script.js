@@ -1,3 +1,4 @@
+
 let count = 0;
 let cursorupgradeCost = 100;
 let fishingupgradeCost = 1500;
@@ -28,6 +29,7 @@ function incrementCount() {
     } else {
         document.getElementById("godcost").style.color = "#ff0000";
     }
+    window.save(count,clickValue);
 }
 
 function cursorupgrade() {
@@ -37,6 +39,7 @@ function cursorupgrade() {
         clickValue += 2; 
         document.getElementById("count").innerHTML = Math.round(count);
         document.getElementById("cursorcost").innerHTML = "🍤 " + Math.round(cursorupgradeCost);
+        window.save(count,clickValue);
     } else {
         alert("Not enough cookies to upgrade!");
     }
@@ -49,6 +52,7 @@ function fishingupgrade() {
         clickValue += 10; 
         document.getElementById("count").innerHTML = Math.round(count);
         document.getElementById("fishingcost").innerHTML = "🍤 " + Math.round(fishingupgradeCost);
+        window.save(count,clickValue);
     } else {
         alert("Not enough cookies to upgrade!");
     }
@@ -61,6 +65,7 @@ function boatupgrade() {
         clickValue += 100; 
         document.getElementById("count").innerHTML = Math.round(count);
         document.getElementById("boatcost").innerHTML = "🍤 " + Math.round(boatupgradeCost);
+        window.save(count,clickValue);
     } else {
         alert("Not enough cookies to upgrade!");
     }
@@ -73,7 +78,17 @@ function godupgrade() {
         clickValue += 1000; 
         document.getElementById("count").innerHTML = Math.round(count);
         document.getElementById("godcost").innerHTML = "🍤 " + Math.round(godupgradeCost);
+        window.save(count,clickValue);
     } else {
         alert("Not enough cookies to upgrade!");
     }
 }
+
+window.addEventListener( "load", async()=>{
+    document.getElementById("count").innerHTML = "クリックせずにお待ちください...";
+    await new Promise((resolve)=>setTimeout(resolve,500));//500msの遅延を意図的に.ログインまでの時間を稼ぐ
+    let data = await window.load();
+    clickValue = data.clickValue;
+    count = data.count;
+    document.getElementById("count").innerHTML = Math.round(count);
+}, false );
